@@ -71,10 +71,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "TheBigBrainBlog:build:production"
+              "buildTarget": "TheBigBrainBlog:build:production"
             },
             "development": {
-              "browserTarget": "TheBigBrainBlog:build:development"
+              "buildTarget": "TheBigBrainBlog:build:development"
             }
           },
           "defaultConfiguration": "development"
