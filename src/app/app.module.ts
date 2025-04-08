@@ -19,6 +19,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DropDownComponent } from "./drop-down/drop-down.component";
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BlogpostListComponent,
     AddCategoryComponent,
     EditCategoryComponent,
-    CategoryListComponent
+    CategoryListComponent,
+    DropDownComponent
     // Other components...
   ],
   imports: [
@@ -43,7 +45,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatFormFieldModule,
     MatInputModule,
     BrowserAnimationsModule
-  ],
+],
   providers: [],
   bootstrap: [AppComponent],
 })

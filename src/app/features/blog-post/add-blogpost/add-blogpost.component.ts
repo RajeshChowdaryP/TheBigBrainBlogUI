@@ -103,4 +103,9 @@ export class AddBlogpostComponent implements OnInit {
     }
   }
 
+  selectedOptions(selectedIds: string[]) {
+    this.formData.selectedCategories = selectedIds;
+    console.log('Selected categories:', this.formData.selectedCategories);
+  }
+
 }

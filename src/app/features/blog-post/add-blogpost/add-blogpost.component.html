@@ -103,18 +103,23 @@
             </div>
 
             <div class="mt-3">
-                <!-- <label for="categories" class="form-label">Categories</label>
-                                        <select id="categories" class="form-select" [(ngModel)]="formData.selectedCategories" name="selectedCategory" multiple>
-                                            <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
-                                        </select> -->
-                <mat-form-field appearance="fill">
+                <label for="categories" class="form-label">Categories</label>
+                <!-- <select id="categories" 
+                class="form-select" 
+                [(ngModel)]="formData.selectedCategories" 
+                name="selectedCategory" multiple>
+                    <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
+                </select> -->
+
+                <app-drop-down [options]="categories" (selectedOptions)="selectedOptions($event)"></app-drop-down>
+                <!-- <mat-form-field appearance="fill">
                     <mat-label>Categories</mat-label>
                     <mat-select [(ngModel)]="formData.selectedCategories" multiple>
                         <mat-option *ngFor="let category of categories" [value]="category.id">
                             {{ category.name }}
                         </mat-option>
                     </mat-select>
-                </mat-form-field>
+                </mat-form-field> -->
             
             </div>
 

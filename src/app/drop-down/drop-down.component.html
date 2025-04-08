@@ -1,0 +1,24 @@
+<div class="dropdown-wrapper" tabindex="0">
+    <div class="input-box" (click)="toggleDropdown()">
+      <div class="selected-tags" *ngIf="selectedItems.length > 0">
+        <span *ngFor="let item of selectedItems" class="tag">
+          {{ item[labelKey] }}
+          <span class="remove" (click)="removeItem(item); $event.stopPropagation()">×</span>
+        </span>
+      </div>
+      <span class="arrow">&#9662;</span>
+    </div>
+  
+    <div class="dropdown-list" *ngIf="dropdownOpen">
+        <div *ngIf="!options || options.length === 0" class="no-data">
+            No data to display
+        </div>
+      <div *ngFor="let option of options"
+           class="dropdown-option"
+           [class.selected]="isSelected(option)"
+           (click)="toggleSelection(option)">
+        {{ option[labelKey] }}
+      </div>
+    </div>
+  </div>
+  
