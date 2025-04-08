@@ -1,0 +1,9 @@
+// :host {
+//     display: block;
+//     padding-top: 4rem; /* Adjust this value to match the navbar's height */
+// }
+
+::ng-deep .form-check-input:checked {
+    background-color: #000;
+    border-color: #000;
+}

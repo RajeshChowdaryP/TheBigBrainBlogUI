@@ -1,1 +1,87 @@
-/* You can add global styles to this file, and also import other style files */
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$TheBigBrainBlog-primary: mat.define-palette(mat.$indigo-palette);
+$TheBigBrainBlog-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$TheBigBrainBlog-warn: mat.define-palette(mat.$red-palette);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$TheBigBrainBlog-theme: mat.define-light-theme((
+  color: (
+    primary: $TheBigBrainBlog-primary,
+    accent: $TheBigBrainBlog-accent,
+    warn: $TheBigBrainBlog-warn,
+  )
+));
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($TheBigBrainBlog-theme);
+
+.btn-black {
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 0;
+}
+
+.btn-black:hover {
+    background-color: #333; /* Slightly lighter black for hover effect */
+    color: white;
+}
+
+.btn-black:disabled {
+    background-color: lightgrey; /* Light grey background for disabled state */
+    color: #ffffff; /* White text for contrast */
+    border-color: lightgrey; /* Match border color with background */
+    cursor: not-allowed; /* Show not-allowed cursor for disabled buttons */
+    opacity: 0.65; /* Optional: Add some transparency */
+}
+
+.form-control, .form-select {
+    border: 1px solid #c6c7c8; /* Default border color */
+}
+
+// .input:-internal-autofill-selected {
+//     // appearance: menulist-button;
+//     background-image: none !important;
+//     background-color: light-dark(#ffffff, rgba(70, 90, 126, 0.4)) !important;
+//     color: fieldtext !important;
+// }
+
+.form-control:focus, .form-select:focus {
+    color: var(--bs-body-color);
+    /* background-color: #e9ecef; */
+    border-color: #c6c7c8; /* Focus border color */
+    outline: 0;
+    box-shadow: 0 0 0 .25rem #0000001c;
+}
+
+.form-check-input:focus {
+    border-color: #c6c7c8;
+    outline: 0;
+    box-shadow: 0 0 0 .25rem #0000001c;
+}
+
+/* Highlight dropdown options on hover */
+.form-select option:hover {
+    background-color: black; /* Black background on hover */
+    color: white; /* White text on hover */
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
