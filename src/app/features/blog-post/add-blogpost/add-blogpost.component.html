@@ -30,16 +30,20 @@
             </div>
 
             <div class="mt-3">
-                <div class="d-flex align-items-center justify-content-between mb-2">
-                    <label for="content" class="form-label me-3">
-                        Content 
-                        <a href="javascript:void(0)" *ngIf="!showContentPreview && formData.content.trim()" (click)="toggleContentPreview()">
-                            (Preview)
-                        </a>
-                    </label>
-                    <div class="form-check form-switch me-3" *ngIf="formData.content.trim() && showContentPreview" >
-                        <input type="checkbox" id="syncScroll" [(ngModel)]="syncScrollEnabled" name="syncScroll" class="form-check-input"> 
-                        <label class="form-check-label" for="syncScroll">sync scroll</label>
+                <div class="d-flex align-items-center mb-2">
+                    <div class="d-flex justify-content-between" style="width: 50%">
+                        <label for="content" class="form-label me-3">
+                            Content
+                            <a href="javascript:void(0)" *ngIf="!showContentPreview && formData.content.trim()"
+                                (click)="toggleContentPreview()">
+                                (Preview)
+                            </a>
+                        </label>
+                        <div class="form-check form-switch me-3" *ngIf="formData.content.trim() && showContentPreview">
+                            <input type="checkbox" id="syncScroll" [(ngModel)]="syncScrollEnabled" name="syncScroll"
+                                class="form-check-input">
+                            <label class="form-check-label" for="syncScroll">sync scroll</label>
+                        </div>
                     </div>
                     <label for="content-preview" class="form-label" *ngIf="showContentPreview && formData.content.trim()">
                         Content Preview 
@@ -72,8 +76,8 @@
                 <label for="featuredImgUrl" class="form-label">Featured Image Url <a href="javascript:void(0)" *ngIf="formData.featuredImgUrl.trim()"
                     (click)="toggleImgPreview()">({{!showImgPreview && formData.featuredImgUrl.trim() ? 'Preview' : 'Close Preview'}})</a></label>
                 <ng-container *ngIf="formData.featuredImgUrl.trim() && showImgPreview">
-                    <div>
-                        <img [src]="formData.featuredImgUrl" alt="Featured Image" loading="eager" class="img-fluid my-2" heifht="100">
+                    <div style="width: 200px">
+                        <img [src]="formData.featuredImgUrl" alt="Featured Image" loading="eager" class="img-fluid my-2" height="100">
                     </div>
                 </ng-container>
                 <input type="text" 

@@ -24,7 +24,7 @@ export class AddBlogpostComponent implements OnInit {
     publishedDate: new Date(),
     author: '',
     isVisible: true,
-    selectedCategories: [],
+    categories: [],
   };
 
   categories: Category[]; // Replace with actual categories
@@ -104,8 +104,8 @@ export class AddBlogpostComponent implements OnInit {
   }
 
   selectedOptions(selectedIds: string[]) {
-    this.formData.selectedCategories = selectedIds;
-    console.log('Selected categories:', this.formData.selectedCategories);
+    this.formData.categories = selectedIds;
+    console.log('Selected categories:', this.formData.categories);
   }
 
 }

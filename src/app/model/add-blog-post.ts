@@ -9,5 +9,5 @@ export interface AddBlogPost {
     author: string;
     publishedDate: Date;
     isVisible: boolean;
-    selectedCategories: string[]; // Assuming categories are strings, adjust as needed
+    categories: string[]; // Assuming categories are strings, adjust as needed
 }

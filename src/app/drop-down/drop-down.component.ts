@@ -9,13 +9,22 @@ import { Category } from '../model/Category';
 })
 export class DropDownComponent {
   @Input() options: Category[] = [];
+  @Input() selectedIds: any[] = []; // Pre-selected IDs passed from the parent
   @Output() selectedOptions: EventEmitter<any[]> = new EventEmitter<any[]>();
 
   selectedItems: any[] = [];
   labelKey = 'name';
   valueKey = 'id';
   dropdownOpen = false;
-  selectedIds: any[] = [];
+  // selectedIds: any[] = [];
+
+  ngOnInit() {
+    if (this.selectedIds && this.selectedIds.length > 0) {
+      this.selectedItems = this.options.filter(option =>
+        this.selectedIds.includes(option[this.valueKey])
+      );
+    }
+  }
 
   toggleDropdown() {
     this.dropdownOpen = !this.dropdownOpen;

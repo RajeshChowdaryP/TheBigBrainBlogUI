@@ -11,8 +11,8 @@
                         <th>Title</th>
                         <th>Short Description</th>
                         <th>Is Visible?</th>
-                        <!-- <th>Actions</th> -->
                         <th>Categories</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -31,6 +31,8 @@
                                 </ng-container>
                             </ng-container>
                             <ng-template #noCategories>NA</ng-template>
+                        </td>
+                        <td><a [routerLink]="'/Admin/BlogPosts/' + blogPost.id">Edit</a>
                         </td>
                     </tr>
                 </tbody>
