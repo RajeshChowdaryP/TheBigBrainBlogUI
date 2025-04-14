@@ -35,7 +35,7 @@ export class AddCategoryComponent implements OnInit, OnDestroy {
           this.router.navigateByUrl('/Admin/Categories');
         },
         error: er => {
-          console.log(er);
+          console.error(er);
         }
       });
     }

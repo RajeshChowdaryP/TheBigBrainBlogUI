@@ -1,11 +1,12 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Route } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { BlogpostService } from '../../services/blogpost.service';
 import { BlogPost } from 'src/app/model/blogPost';
 import { NgForm } from '@angular/forms';
 import { Category } from 'src/app/model/Category';
 import { CategoryService } from '../../services/category.service';
+import { UpdateBlogPost } from 'src/app/model/UpdateBlogPost';
 
 @Component({
   selector: 'app-edit-blogpost',
@@ -16,6 +17,7 @@ export class EditBlogpostComponent implements OnInit, OnDestroy {
   blogPostId: string | null = null;
   destroy$ = new Subject(); // Subject to manage the lifecycle of the component
   formData: any = null; // Property to hold the blog post data
+  
 
   syncScrollEnabled = false; // Flag to control scroll synchronization
   categories: Category[]; // Replace with actual categories
@@ -26,7 +28,7 @@ export class EditBlogpostComponent implements OnInit, OnDestroy {
 
 
   constructor(private route: ActivatedRoute, private blogPostService: BlogpostService,
-    private categoryService: CategoryService) { }
+    private categoryService: CategoryService, private router: Router) { }
 
   ngOnInit(): void {
     // this.blogPostId = this.route.snapshot.paramMap.get('id') || ''; // Get the blog post ID from the route parameters
@@ -52,10 +54,11 @@ export class EditBlogpostComponent implements OnInit, OnDestroy {
     if (id) {
       this.blogPostService.getBlogPostById(id).subscribe({
         next: (data) => {
-          console.log('Blog post data:', data); // Log the blog post data
+          // console.log('Blog post data:', data); // Log the blog post data
           this.formData = data; // Assign the data to the blogPost property
+          this.formData.categories = this.formData.categories.map((category: Category) => category.id); // Map the categories to their IDs
           for(let category of this.formData.categories) {
-            this.preSelectedCategories.push(category.id); // Push the category IDs to the preSelectedCategories array
+            this.preSelectedCategories.push(category); // Push the category IDs to the preSelectedCategories array
           }
         },
         error: (error) => {
@@ -68,7 +71,16 @@ export class EditBlogpostComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(form: NgForm){
-    console.log('submitted form:', form.value); // Log the submitted form data
+    // console.log('submitted form:', this.formData); // Log the submitted form data
+    this.blogPostService.updateBlogPost(this.blogPostId,this.formData).subscribe({
+      next: (response) => {
+        console.log('Blog post updated successfully:', response); // Log the successful response
+        this.router.navigateByUrl('/Admin/BlogPosts'); // Navigate to the blog post list page
+      },
+      error: (error) => {
+        console.error('Error updating blog post:', error); // Log any errors
+      }
+    }); // Call the service to update the blog post
   }
 
   showContentPreview = false;
@@ -108,10 +120,20 @@ export class EditBlogpostComponent implements OnInit, OnDestroy {
   }
 
   selectedOptions(selectedIds: string[]) {
-    this.formData.categories = selectedIds;
-    console.log('Selected categories:', this.formData.categories);
+    this.formData['categories'] = selectedIds;
+    // console.log('Selected categories:', this.formData.categories);
   }
 
-  
+  DeleteRecord(blogPostId: string) {
+    this.blogPostService.deleteBlogPost(blogPostId).subscribe({
+      next: response => {
+        // console.log('Blog post deleted successfully:', response); // Log the successful response
+        this.router.navigateByUrl('/Admin/BlogPosts'); // Navigate to the blog post list page
+      },
+      error: error => {
+        console.error('Error deleting blog post:', error); // Log any errors
+      }
+    }); // Call the service to delete the blog post
+  }
 
 }

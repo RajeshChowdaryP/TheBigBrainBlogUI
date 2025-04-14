@@ -24,7 +24,7 @@ export class EditCategoryComponent implements OnInit {
           this.category = response;
         },
         error: er => {
-          console.log(er);
+          console.error(er);
         }
       });
     });
@@ -33,11 +33,10 @@ export class EditCategoryComponent implements OnInit {
   UpdateCategory(form){
     this.categoryService.updateSelectedCategoryValues(this.category.id,this.category).subscribe({
       next: response => {
-        console.log(response);
-        this.router.navigateByUrl('/Admin/Categories')
+        this.router.navigateByUrl('/Admin/Categories');
       },
       error: er => {
-        console.log(er);
+        console.error(er);
       }
     });
   }
@@ -45,11 +44,11 @@ export class EditCategoryComponent implements OnInit {
   DeleteRecord(category){
     this.categoryService.deleteCategory(category.id).subscribe({
       next: response => {
-        console.log(response);
+        // console.log(response);
         this.router.navigateByUrl('/Admin/Categories')
       },
       error: er => {
-        console.log(er);
+        console.error(er);
       }
     })
   }

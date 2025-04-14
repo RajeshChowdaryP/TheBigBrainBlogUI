@@ -54,14 +54,14 @@ export class AddBlogpostComponent implements OnInit {
   }
 
   onSubmit(form: any) {
-    console.log('Form submitted:', this.formData);
+    // console.log('Form submitted:', this.formData);
     if (form.valid) {
       this.blogPostService.addBlogPost(this.formData).subscribe({
         next: val => {
           this.router.navigateByUrl('/Admin/BlogPosts');
         },
         error: er => {
-          console.log(er);
+          console.error(er);
         }
       });
     }
@@ -105,7 +105,7 @@ export class AddBlogpostComponent implements OnInit {
 
   selectedOptions(selectedIds: string[]) {
     this.formData.categories = selectedIds;
-    console.log('Selected categories:', this.formData.categories);
+    // console.log('Selected categories:', this.formData.categories);
   }
 
 }
