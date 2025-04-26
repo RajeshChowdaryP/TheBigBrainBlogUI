@@ -22,6 +22,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DropDownComponent } from "./shared/drop-down/drop-down.component";
 import { EditBlogpostComponent } from './features/blog-post/edit-blogpost/edit-blogpost.component';
 import { ImageSelectorComponent } from "./shared/image-selector/image-selector.component";
+import { HomeComponent } from './features/public/home/home.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { ImageSelectorComponent } from "./shared/image-selector/image-selector.c
     DropDownComponent,
     EditBlogpostComponent,
     ImageSelectorComponent,
+    HomeComponent
     // Other components...
   ],
   imports: [
