@@ -2,6 +2,24 @@
     <div class="my-5">
         <div class="row align-items-strech">
             <ng-container *ngIf="blogs$ | async as blogs">
+                <div class="d-flex justify-content-center">
+                    <div class="input-group mb-5" style="width: 40%;">
+
+                        <input type="text" class="form-control" placeholder="Search Blogs.." [formControl]="searchText"
+                            style="outline: none; box-shadow: none;">
+
+                        <span class="input-group-text bg-black text-white"
+                            style="border-radius: 0%; height: 2.6rem; border-color: black;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor"
+                                class="bi bi-search" viewBox="0 0 16 16">
+                                <path
+                                    d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                            </svg>
+                        </span>
+
+                    </div>
+                </div>
+
                 <div class="col-12 col-md-4 mb-3" *ngFor="let blog of blogs">
                     <!-- <app-blog-card [blog]="blog"></app-blog-card> -->
                     <div class="card h-100">
@@ -11,17 +29,29 @@
                             <h5 class="card-title">{{ blog.title }}</h5>
                             <p class="card-text text-end"><small class="text-muted">[Published on {{ blog.publishedDate
                                     | date }}]</small></p>
-                            <p class="card-text">{{ blog.shortDescription }}</p>
-                            <a [routerLink]="['/blog', blog.urlHandle]"
+                            <p class="card-text" id="shortDescription">{{ blog.shortDescription }}</p>
+                            <!-- <a [routerLink]="['/blog', blog.urlHandle]"
                                 class="text-primary mt-auto align-self-end read-more-link">
                                 Read More..
-                            </a>
+                            </a> -->
+                            <button type="button" class="btn btn-black mt-auto align-self-end"
+                                [routerLink]="['/blog', blog.urlHandle]">Read More..</button>
                         </div>
                     </div>
 
                 </div>
 
             </ng-container>
+
+
+            <div #showNoContent *ngIf="(blogs$ | async)?.length === 0 || (blogs$ | async) === null || (blogs$ | async) === undefined">
+                <div class="d-flex justify-content-center">
+                    <!-- <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">No blogs to display</span>
+                    </div> -->
+                    <p class="text-center text-muted">No blogs found with the title "{{searchText.value}}"</p>
+                </div>
+            </div>
         </div>
     </div>
 </div>
