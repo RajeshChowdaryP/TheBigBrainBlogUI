@@ -3,6 +3,7 @@ import { BlogpostService } from '../../services/blogpost.service';
 import { Observable, of } from 'rxjs';
 import { BlogPost } from 'src/app/model/blogPost';
 import { FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -16,9 +17,8 @@ export class HomeComponent implements OnInit {
   searchText: FormControl = new FormControl('');
   blogPosts: BlogPost[] = [];
 
-  constructor(private blogPostService: BlogpostService) { }
+  constructor(private blogPostService: BlogpostService, private route: Router) { }
 
-  
   ngOnInit(): void {
     // Initialize component
     this.blogs$ = this.blogPostService.getAllBlogPosts();
@@ -32,6 +32,10 @@ export class HomeComponent implements OnInit {
       });
       this.blogs$ = of(filteredPosts);
     });
+  }
+
+  goToBlogDetails(url: string) {
+    this.route.navigateByUrl('/Blog/' + url);
   }
 
 }

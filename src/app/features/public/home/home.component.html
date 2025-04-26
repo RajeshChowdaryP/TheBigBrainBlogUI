@@ -28,14 +28,14 @@
                         <div class="card-body d-flex flex-column">
                             <h5 class="card-title">{{ blog.title }}</h5>
                             <p class="card-text text-end"><small class="text-muted">[Published on {{ blog.publishedDate
-                                    | date }}]</small></p>
+                                    | date: 'dd MMM yyyy' }}]</small></p>
                             <p class="card-text" id="shortDescription">{{ blog.shortDescription }}</p>
                             <!-- <a [routerLink]="['/blog', blog.urlHandle]"
                                 class="text-primary mt-auto align-self-end read-more-link">
                                 Read More..
                             </a> -->
                             <button type="button" class="btn btn-black mt-auto align-self-end"
-                                [routerLink]="['/blog', blog.urlHandle]">Read More..</button>
+                                (click)="goToBlogDetails(blog.urlHandle)">Read More..</button>
                         </div>
                     </div>
 

@@ -23,6 +23,7 @@ import { DropDownComponent } from "./shared/drop-down/drop-down.component";
 import { EditBlogpostComponent } from './features/blog-post/edit-blogpost/edit-blogpost.component';
 import { ImageSelectorComponent } from "./shared/image-selector/image-selector.component";
 import { HomeComponent } from './features/public/home/home.component';
+import { BlogDetailsComponent } from './features/public/blog-details/blog-details.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { HomeComponent } from './features/public/home/home.component';
     DropDownComponent,
     EditBlogpostComponent,
     ImageSelectorComponent,
-    HomeComponent
+    HomeComponent,
+    BlogDetailsComponent,
     // Other components...
   ],
   imports: [
@@ -50,7 +52,7 @@ import { HomeComponent } from './features/public/home/home.component';
     MatSelectModule,
     MatFormFieldModule,
     MatInputModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
 ],
   providers: [],
   bootstrap: [AppComponent],

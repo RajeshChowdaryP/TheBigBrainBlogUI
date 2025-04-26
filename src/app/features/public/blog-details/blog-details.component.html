@@ -1,1 +1,50 @@
-<p>blog-details works!</p>
+<div class="container">
+    <ng-container *ngIf="blogpost$ | async as blogPost; else loading">
+        <div class="py-5">
+            <div class="col-12 col-md-8 col-md-6 mx-auto">
+
+                <img [src]="blogPost.featuredImgUrl" class="img-fluid" alt="Blog Image" loading="lazy"
+                    style="height: 30rem; width: 100%;" [title]="blogPost.title">
+                <h1 class="mt-4">{{ blogPost.title }}</h1>
+
+                <!-- <div class="d-flex justify-content-between mt-4">
+                    <span><strong>Author:</strong> {{ blogPost.author }}</span>
+                    <span><strong>Published on:</strong> {{ blogPost.publishedDate | date:
+                            'dd MMM yyyy' }}</span>
+                </div>
+
+                <div class="mt-4" *ngIf="blogPost.categories?.length > 0">
+                    <strong>Tags:</strong>
+                    <span *ngFor="let category of blogPost.categories; let last = last" class="badge bg-dark me-1 ms-1">
+                        {{ category.name }}
+                    </span>
+                        <span *ngIf="!last">, </span>
+                </div> -->
+
+                <div class="text-center mt-4">
+                    <div><strong>Author:</strong> {{ blogPost.author }}</div>
+                    <div><strong>Published on:</strong> {{ blogPost.publishedDate | date: 'dd MMM yyyy' }}</div>
+                    <div *ngIf="blogPost.categories?.length > 0"><strong>Tags:</strong>
+                    <span *ngFor="let category of blogPost.categories; let last = last" class="badge bg-dark me-1 ms-1">
+                        {{ category.name }}
+                    </span></div>
+                </div>
+
+                <div class="mt-4 blog-content">
+                    <markdown [data]="blogPost.content"></markdown>
+                </div>
+
+            </div>
+        </div>
+
+    </ng-container>
+
+</div>
+
+<ng-template #loading>
+    <div class="d-flex justify-content-center text-center mt-5">
+        <div class="spinner-border text-dark" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+</ng-template>
