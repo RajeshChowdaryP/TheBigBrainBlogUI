@@ -19,8 +19,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { DropDownComponent } from "./drop-down/drop-down.component";
+import { DropDownComponent } from "./shared/drop-down/drop-down.component";
 import { EditBlogpostComponent } from './features/blog-post/edit-blogpost/edit-blogpost.component';
+import { ImageSelectorComponent } from "./shared/image-selector/image-selector.component";
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { EditBlogpostComponent } from './features/blog-post/edit-blogpost/edit-b
     CategoryListComponent,
     DropDownComponent,
     EditBlogpostComponent,
+    ImageSelectorComponent,
     // Other components...
   ],
   imports: [

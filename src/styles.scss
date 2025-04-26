@@ -88,3 +88,26 @@ $TheBigBrainBlog-theme: mat.define-light-theme((
 }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.images-container-model {
+    width: 100%;
+    height: 100%;
+    // display: flex;
+    // flex-wrap: wrap;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1110;
+    padding: 60px;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.imgButton {
+  display: block;
+  width: fit-content;
+  padding: 3px;
+  margin-bottom: 4px;
+  margin-left: 2px;
+  background: lightgrey;
+  border-radius: 0px;
+}

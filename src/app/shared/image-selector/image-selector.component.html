@@ -1,0 +1,54 @@
+<div class="card h-100">
+    <div class="card-header">
+        <div class="d-flex justify-content-between align-items-center pe-2">
+            <h3 class="card-title">Images</h3>
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-x-square-fill" viewBox="0 0 16 16" (click)="close()">
+                <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm3.354 4.646L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708"/>
+              </svg>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="d-flex flex-md-row flex-column flex-wrap" style="overflow-y: auto;">
+                <div class="col-8 p-4">
+                    <ng-container *ngIf="images$ | async as imagesList">
+                        <div class="d-flex flex-wrap">
+                            <ng-container *ngFor="let image of imagesList; let i = index">
+                                <div class="position-relative me-2 mb-2" style="width: 150px; height: 150px;" (click)="selectedImage(image)">
+
+                                    <img [src]="image.url" [alt]="image.title" 
+                                    loading="lazy" class="img-fluid rounded" 
+                                    style="width: 100%; height: 100%; object-fit: cover;">
+
+                                    <span class="position-absolute top-0 
+                                    start-0 badge rounded-pill bg-dark" 
+                                    style="font-size: 12px;">{{image.title}}</span>
+                                    <!-- <button type="button" class="btn-close position-absolute top-0 end-0" (click)="deleteImage(image.id)"></button> -->
+                                </div>
+                            </ng-container>
+                        </div>
+                    </ng-container>
+                </div>
+                <div class="col-4 p-4 bg-light">
+                    <h5>Upload Image</h5>
+
+                    <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+                        <div class="mt-3">
+                            <input type="file" id="image" class="form-control" name="image" (change)="onFileUpload($event)">
+                        </div>
+                        <div class="mt-3">
+                            <input type="text" id="imageName" class="form-control" name="fileName"
+                                placeholder="File Name" [(ngModel)]="fileName">
+                        </div>
+                        <div class="mt-3">
+                            <input type="text" id="title" class="form-control" name="title"
+                                placeholder="Title" [(ngModel)]="title">
+                        </div>
+                        <div class="mt-3">
+                            <button type="submit" class="btn btn-black">Upload</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+</div>

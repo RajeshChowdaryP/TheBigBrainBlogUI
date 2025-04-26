@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { Category } from 'src/app/model/Category';
 import { CategoryService } from '../../services/category.service';
 import { marked } from 'marked';
+import { ImageService } from '../../services/image.service';
+import { takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-add-blogpost',
@@ -30,13 +32,14 @@ export class AddBlogpostComponent implements OnInit {
   categories: Category[]; // Replace with actual categories
 
   syncScrollEnabled = false; // Flag to control scroll synchronization
+  showImageSelector: boolean = false; // Flag to control the visibility of the image selector
 
   @ViewChild('contentTextarea') contentTextarea!: ElementRef<HTMLTextAreaElement>;
   @ViewChild('markdownPreview') markdownPreview!: ElementRef<HTMLDivElement>;
 
 
   constructor(private datePipe: DatePipe, private blogPostService: BlogpostService, private router: Router,
-    private categoryService: CategoryService
+    private categoryService: CategoryService, private imageService: ImageService
   ) {
 
   }
@@ -49,6 +52,12 @@ export class AddBlogpostComponent implements OnInit {
       },
       error: (error) => {
         console.error('Error fetching categories:', error);
+      }
+    });
+
+    this.imageService.onImageSelected().subscribe((image) => {
+      if (image && this.formData) {
+        this.formData.featuredImgUrl = image.url; // Set the selected image URL to the form data
       }
     });
   }
@@ -106,6 +115,10 @@ export class AddBlogpostComponent implements OnInit {
   selectedOptions(selectedIds: string[]) {
     this.formData.categories = selectedIds;
     // console.log('Selected categories:', this.formData.categories);
+  }
+
+  openImageSelector(): void {
+    this.showImageSelector = true; // Toggle the visibility of the image selector
   }
 
 }

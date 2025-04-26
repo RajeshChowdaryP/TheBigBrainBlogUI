@@ -1,5 +1,5 @@
 import { Component, EventEmitter, HostListener, Input, Output } from '@angular/core';
-import { Category } from '../model/Category';
+import { Category } from '../../model/Category';
 
 @Component({
   selector: 'app-drop-down',

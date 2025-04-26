@@ -7,6 +7,7 @@ import { NgForm } from '@angular/forms';
 import { Category } from 'src/app/model/Category';
 import { CategoryService } from '../../services/category.service';
 import { UpdateBlogPost } from 'src/app/model/UpdateBlogPost';
+import { ImageService } from '../../services/image.service';
 
 @Component({
   selector: 'app-edit-blogpost',
@@ -17,6 +18,7 @@ export class EditBlogpostComponent implements OnInit, OnDestroy {
   blogPostId: string | null = null;
   destroy$ = new Subject(); // Subject to manage the lifecycle of the component
   formData: any = null; // Property to hold the blog post data
+  showImageSelector: boolean = false; // Flag to control the visibility of the image selector
   
 
   syncScrollEnabled = false; // Flag to control scroll synchronization
@@ -28,7 +30,7 @@ export class EditBlogpostComponent implements OnInit, OnDestroy {
 
 
   constructor(private route: ActivatedRoute, private blogPostService: BlogpostService,
-    private categoryService: CategoryService, private router: Router) { }
+    private categoryService: CategoryService, private router: Router, private imageService: ImageService) { }
 
   ngOnInit(): void {
     // this.blogPostId = this.route.snapshot.paramMap.get('id') || ''; // Get the blog post ID from the route parameters
@@ -40,9 +42,16 @@ export class EditBlogpostComponent implements OnInit, OnDestroy {
         console.error('Error fetching categories:', error);
       }
     });
+
     this.route.paramMap.pipe(takeUntil(this.destroy$)).subscribe(params => {
       this.blogPostId = params.get('id'); // Get the blog post ID from the route parameters
       this.loadBlogPost(this.blogPostId); // Load the blog post details
+    });
+
+    this.imageService.onImageSelected().pipe(takeUntil(this.destroy$)).subscribe((image) => {
+      if (image && this.formData) {
+        this.formData.featuredImgUrl = image.url; // Set the selected image URL to the form data
+      }
     });
   }
   
@@ -134,6 +143,10 @@ export class EditBlogpostComponent implements OnInit, OnDestroy {
         console.error('Error deleting blog post:', error); // Log any errors
       }
     }); // Call the service to delete the blog post
+  }
+
+  openImageSelector(): void {
+    this.showImageSelector = true; // Toggle the visibility of the image selector
   }
 
 }
