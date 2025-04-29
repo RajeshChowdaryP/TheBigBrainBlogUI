@@ -20,6 +20,7 @@ const routes: Routes = [
   {path: 'Admin/BlogPosts', component: BlogpostListComponent},
   {path: 'Admin/BlogPosts/Add', component: AddBlogpostComponent},
   {path: 'Admin/BlogPosts/:id', component: EditBlogpostComponent},
+  {path: '**', redirectTo: ''} // Redirect to home for any unknown routes
 ];
 
 @NgModule({
