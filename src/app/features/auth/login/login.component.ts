@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
         console.log('Login successful', response);
         //npm install ngx-cookie-service@17.0.0 --save
         // Set the token in local storage or cookies
-        this.cookieService.set('Authorization', `Bearer: ${response.token}`, undefined, '/', undefined, true, 'Strict');
+        this.cookieService.set('Authorization', `Bearer ${response.token}`, undefined, '/', undefined, true, 'Strict');
         
         // Set loginStatus
         this.authService.setUser({

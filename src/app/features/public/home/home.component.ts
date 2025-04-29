@@ -4,6 +4,7 @@ import { Observable, of } from 'rxjs';
 import { BlogPost } from 'src/app/model/blogPost';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -17,7 +18,9 @@ export class HomeComponent implements OnInit {
   searchText: FormControl = new FormControl('');
   blogPosts: BlogPost[] = [];
 
-  constructor(private blogPostService: BlogpostService, private route: Router) { }
+  constructor(private blogPostService: BlogpostService, private route: Router,
+    private authService: AuthService
+  ) { }
 
   ngOnInit(): void {
     // Initialize component
@@ -35,7 +38,17 @@ export class HomeComponent implements OnInit {
   }
 
   goToBlogDetails(url: string) {
-    this.route.navigateByUrl('/Blog/' + url);
+    if (!this.checkLoggedIn()) {
+      this.route.navigateByUrl('/Login');
+    }
+    else {
+      this.route.navigateByUrl('/Blog/' + url);
+    }
+  }
+
+  checkLoggedIn(): boolean {
+    // Check if the user is logged in using the AuthService
+    return this.authService.isLoggedIn();
   }
 
 }

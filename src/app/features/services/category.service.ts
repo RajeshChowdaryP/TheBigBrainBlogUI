@@ -5,13 +5,14 @@ import { AddCategory } from 'src/app/model/AddCategoryRequest';
 import { Category } from 'src/app/model/Category';
 import { UpdateCategory } from 'src/app/model/UpdateCategory';
 import { environment } from '../../environments/environment';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CategoryService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private cookieService: CookieService) { }
 
   addCategory(category: AddCategory): Observable<void>{
     return this.http.post<void>(`${environment.apiBaseUrl}Categories/CreateCategory`,category);
@@ -33,6 +34,16 @@ export class CategoryService {
 
     }
     return this.http.put<Category>(`${environment.apiBaseUrl}Categories/UpdateCategory/${id}`,categoryItem);
+
+    // 1 way to pass the JWT token in the header but there is better way (2nd way) to do it using interceptors in angular
+
+    // return this.http.put<Category>(`${environment.apiBaseUrl}Categories/UpdateCategory/${id}`, categoryItem,
+    //   {
+    //     headers: {
+    //       'Authorization': `${this.cookieService.get('Authorization')}`, // token saved key in cookies and its value is the token
+    //     }
+    //   }
+    // );
   }
 
   deleteCategory(id){

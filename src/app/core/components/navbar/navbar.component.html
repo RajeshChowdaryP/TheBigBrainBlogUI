@@ -11,17 +11,21 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="">Home</a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            Admin
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" routerLink="/Admin/Categories">Categories</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" routerLink="/Admin/BlogPosts">BlogPosts</a></li>
-                        </ul>
-                    </li>
+                    <ng-container *ngIf="user !== undefined && user?.roles?.includes('Writer')">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                Admin
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" routerLink="/Admin/Categories">Categories</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" routerLink="/Admin/BlogPosts">BlogPosts</a></li>
+                            </ul>
+                        </li>
+                    </ng-container>
                 </ul>
                 <div class="d-flex ms-auto">
                     <!-- <ul class="navbar-nav me-2 mb-2">
@@ -47,7 +51,8 @@
                     <ng-template #loggedIn>
                         <div class="d-flex align-items-center">
                             <span class="text-light me-2">{{ user.email }}</span>
-                            <a class="btn btn-outline-light" style="border-radius: 0%;" routerLink="/Logout" (click)="onLogout()">Logout</a>
+                            <a class="btn btn-outline-light" style="border-radius: 0%;" routerLink="/Logout"
+                                (click)="onLogout()">Logout</a>
                         </div>
                     </ng-template>
                 </div>

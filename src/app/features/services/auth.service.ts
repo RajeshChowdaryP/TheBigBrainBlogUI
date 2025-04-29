@@ -63,4 +63,19 @@ export class AuthService {
     this.user$.next(undefined); // Emit undefined to clear the user object in the BehaviorSubject
   }
 
+  isLoggedIn(): boolean {
+    // Check if the user is logged in by checking the presence of the token in cookies
+    return this.cookieService.check('Authorization');
+  }
+
+  getUserRoles(): string[] {
+    // Get the user roles from local storage
+    const userRoles = localStorage.getItem('user-roles');
+    if (userRoles) {
+      return userRoles.split(','); // Return the roles as an array
+    }
+    return undefined; // Return an undefined if no roles are found
+  }
+
+
 }
