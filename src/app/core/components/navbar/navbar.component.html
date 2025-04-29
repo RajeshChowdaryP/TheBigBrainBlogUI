@@ -23,6 +23,34 @@
                         </ul>
                     </li>
                 </ul>
+                <div class="d-flex ms-auto">
+                    <!-- <ul class="navbar-nav me-2 mb-2">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Profile" width="30" height="30"
+                                    class="d-inline-block align-text-top">
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" routerLink="/Profile">Profile</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" routerLink="/Login">Logout</a></li>
+                            </ul>
+                        </li>
+                    </ul> -->
+
+                    <ng-container *ngIf="user == undefined; else loggedIn">
+                        <a class="btn btn-outline-light" style="border-radius: 0%;" routerLink="/Login">Login</a>
+                    </ng-container>
+
+                    <ng-template #loggedIn>
+                        <div class="d-flex align-items-center">
+                            <span class="text-light me-2">{{ user.email }}</span>
+                            <a class="btn btn-outline-light" style="border-radius: 0%;" routerLink="/Logout" (click)="onLogout()">Logout</a>
+                        </div>
+                    </ng-template>
+                </div>
             </div>
         </div>
     </nav>
