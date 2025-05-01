@@ -1,4 +1,6 @@
 <app-navbar #navbar></app-navbar>
 <div id="content">
     <router-outlet></router-outlet>
+    <ng-container *ngIf="commonService.toasterActions?.showToaster">
+    <app-toaster></app-toaster></ng-container>
 </div>

@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { CommonService } from './features/services/common.service';
 
 @Component({
   selector: 'app-root',
@@ -7,6 +8,8 @@ import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 })
 export class AppComponent {
   title = 'TheBigBrainBlog';
+
+  constructor(public commonService: CommonService) {}
 
   // @ViewChild('navbar', { static: false }) navbar!: ElementRef;
 

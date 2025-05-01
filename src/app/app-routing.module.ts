@@ -9,17 +9,23 @@ import { EditBlogpostComponent } from './features/blog-post/edit-blogpost/edit-b
 import { HomeComponent } from './features/public/home/home.component';
 import { BlogDetailsComponent } from './features/public/blog-details/blog-details.component';
 import { LoginComponent } from './features/auth/login/login.component';
+import { authGuard } from './features/auth/guards/auth.guard';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'Login', component: LoginComponent},
-  {path: 'Blog/:url', component: BlogDetailsComponent},
-  {path: 'Admin/Categories', component: CategoryListComponent},
-  {path: 'Admin/Categories/Add', component: AddCategoryComponent},
-  {path: 'Admin/Categories/:id', component: EditCategoryComponent},
-  {path: 'Admin/BlogPosts', component: BlogpostListComponent},
-  {path: 'Admin/BlogPosts/Add', component: AddBlogpostComponent},
-  {path: 'Admin/BlogPosts/:id', component: EditBlogpostComponent},
+  {
+    path: 'Blog/:url', 
+    component: BlogDetailsComponent,
+    canActivate: [authGuard], // Add authGuard to protect the route
+    data: { roles: ['Reader', 'Writer'] } // Pass allowed roles as route data
+  }, // Add authGuard to protect the route
+  {path: 'Admin/Categories', component: CategoryListComponent, canActivate: [authGuard]},
+  {path: 'Admin/Categories/Add', component: AddCategoryComponent, canActivate: [authGuard]},
+  {path: 'Admin/Categories/:id', component: EditCategoryComponent, canActivate: [authGuard]},
+  {path: 'Admin/BlogPosts', component: BlogpostListComponent, canActivate: [authGuard]},
+  {path: 'Admin/BlogPosts/Add', component: AddBlogpostComponent, canActivate: [authGuard]},
+  {path: 'Admin/BlogPosts/:id', component: EditBlogpostComponent, canActivate: [authGuard]},
   {path: '**', redirectTo: ''} // Redirect to home for any unknown routes
 ];
 

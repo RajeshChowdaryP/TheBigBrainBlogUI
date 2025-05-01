@@ -25,7 +25,8 @@ import { ImageSelectorComponent } from "./shared/image-selector/image-selector.c
 import { HomeComponent } from './features/public/home/home.component';
 import { BlogDetailsComponent } from './features/public/blog-details/blog-details.component';
 import { LoginComponent } from './features/auth/login/login.component';
-import { AuthInterceptor } from './core/components/navbar/auth_interceptor/auth.interceptor';
+import { AuthInterceptor } from './core/components/auth_interceptor/auth.interceptor';
+import { ToasterComponent } from "./core/components/toaster/toaster.component";
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { AuthInterceptor } from './core/components/navbar/auth_interceptor/auth.
     HomeComponent,
     BlogDetailsComponent,
     LoginComponent,
+    ToasterComponent,
     // Other components...
   ],
   imports: [
