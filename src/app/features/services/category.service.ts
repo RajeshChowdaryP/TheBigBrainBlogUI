@@ -15,7 +15,7 @@ export class CategoryService {
   constructor(private http: HttpClient, private cookieService: CookieService) { }
 
   addCategory(category: AddCategory): Observable<void>{
-    return this.http.post<void>(`${environment.apiBaseUrl}Categories/CreateCategory`,category);
+    return this.http.post<void>(`${environment.apiBaseUrl}Categories/CreateCategory?addAuth=true`,category);
 
   }
 
@@ -33,7 +33,8 @@ export class CategoryService {
       urlHandle: categoryData.urlHandle
 
     }
-    return this.http.put<Category>(`${environment.apiBaseUrl}Categories/UpdateCategory/${id}`,categoryItem);
+    // ?addAuth=true is used to add the JWT token in the header of the request only if it is required in the API and we have to pass it as a query parameter in the URL and this we will handle in the interceptor
+    return this.http.put<Category>(`${environment.apiBaseUrl}Categories/UpdateCategory/${id}?addAuth=true`,categoryItem);
 
     // 1 way to pass the JWT token in the header but there is better way (2nd way) to do it using interceptors in angular
 
@@ -47,6 +48,6 @@ export class CategoryService {
   }
 
   deleteCategory(id){
-    return this.http.delete<Category>(`${environment.apiBaseUrl}Categories/DeleteCategory/${id}`);
+    return this.http.delete<Category>(`${environment.apiBaseUrl}Categories/DeleteCategory/${id}?addAuth=true`);
   }
 }

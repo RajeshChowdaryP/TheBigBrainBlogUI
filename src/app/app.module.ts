@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { MarkdownModule, MarkedOptions } from 'ngx-markdown';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -25,6 +25,7 @@ import { ImageSelectorComponent } from "./shared/image-selector/image-selector.c
 import { HomeComponent } from './features/public/home/home.component';
 import { BlogDetailsComponent } from './features/public/blog-details/blog-details.component';
 import { LoginComponent } from './features/auth/login/login.component';
+import { AuthInterceptor } from './core/components/navbar/auth_interceptor/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,13 @@ import { LoginComponent } from './features/auth/login/login.component';
     MatInputModule,
     BrowserAnimationsModule,
 ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
