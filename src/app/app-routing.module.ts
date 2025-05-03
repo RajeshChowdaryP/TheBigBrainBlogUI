@@ -10,9 +10,11 @@ import { HomeComponent } from './features/public/home/home.component';
 import { BlogDetailsComponent } from './features/public/blog-details/blog-details.component';
 import { LoginComponent } from './features/auth/login/login.component';
 import { authGuard } from './features/auth/guards/auth.guard';
+import { RegisterComponent } from './features/auth/register/register.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
+  {path: 'Register', component: RegisterComponent},
   {path: 'Login', component: LoginComponent},
   {
     path: 'Blog/:url', 

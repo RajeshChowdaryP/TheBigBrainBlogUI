@@ -27,6 +27,7 @@ import { BlogDetailsComponent } from './features/public/blog-details/blog-detail
 import { LoginComponent } from './features/auth/login/login.component';
 import { AuthInterceptor } from './core/components/auth_interceptor/auth.interceptor';
 import { ToasterComponent } from "./core/components/toaster/toaster.component";
+import { RegisterComponent } from './features/auth/register/register.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { ToasterComponent } from "./core/components/toaster/toaster.component";
     BlogDetailsComponent,
     LoginComponent,
     ToasterComponent,
+    RegisterComponent,
     // Other components...
   ],
   imports: [
