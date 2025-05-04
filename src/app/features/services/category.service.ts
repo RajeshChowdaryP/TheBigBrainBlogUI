@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AddCategory } from 'src/app/model/AddCategoryRequest';
@@ -19,8 +19,12 @@ export class CategoryService {
 
   }
 
-  getAllCategories(): Observable<Category[]>{
-    return this.http.get<Category[]>(`${environment.apiBaseUrl}Categories/GetAllCategories`);
+  getAllCategories(queryParam?: string): Observable<Category[]>{
+    let params = new HttpParams();
+    if (queryParam) {
+      params = params.set('query',queryParam);
+    }
+    return this.http.get<Category[]>(`${environment.apiBaseUrl}Categories/GetAllCategories`,{params: params});
   }
 
   getSelectedCategory(id: string): Observable<Category>{
