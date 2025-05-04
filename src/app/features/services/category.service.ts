@@ -14,31 +14,40 @@ export class CategoryService {
 
   constructor(private http: HttpClient, private cookieService: CookieService) { }
 
-  addCategory(category: AddCategory): Observable<void>{
-    return this.http.post<void>(`${environment.apiBaseUrl}Categories/CreateCategory?addAuth=true`,category);
+  addCategory(category: AddCategory): Observable<void> {
+    return this.http.post<void>(`${environment.apiBaseUrl}Categories/CreateCategory?addAuth=true`, category);
 
   }
 
-  getAllCategories(queryParam?: string): Observable<Category[]>{
+  getAllCategories(queryParam?: string, sortBy?: string, sortDirection?: string): Observable<Category[]> {
     let params = new HttpParams();
     if (queryParam) {
-      params = params.set('query',queryParam);
+      params = params.set('query', queryParam);
     }
-    return this.http.get<Category[]>(`${environment.apiBaseUrl}Categories/GetAllCategories`,{params: params});
+
+    if (sortBy) {
+      params = params.set('sortBy', sortBy);
+    }
+
+    if (sortDirection) {
+      params = params.set('sortDirection', sortDirection);
+    }
+
+    return this.http.get<Category[]>(`${environment.apiBaseUrl}Categories/GetAllCategories`, { params: params });
   }
 
-  getSelectedCategory(id: string): Observable<Category>{
+  getSelectedCategory(id: string): Observable<Category> {
     return this.http.get<Category>(`${environment.apiBaseUrl}Categories/GetCategoryById=${id}`);
   }
 
-  updateSelectedCategoryValues(id,categoryData): Observable<Category>{
+  updateSelectedCategoryValues(id, categoryData): Observable<Category> {
     let categoryItem: UpdateCategory = {
       name: categoryData.name,
       urlHandle: categoryData.urlHandle
 
     }
     // ?addAuth=true is used to add the JWT token in the header of the request only if it is required in the API and we have to pass it as a query parameter in the URL and this we will handle in the interceptor
-    return this.http.put<Category>(`${environment.apiBaseUrl}Categories/UpdateCategory/${id}?addAuth=true`,categoryItem);
+    return this.http.put<Category>(`${environment.apiBaseUrl}Categories/UpdateCategory/${id}?addAuth=true`, categoryItem);
 
     // 1 way to pass the JWT token in the header but there is better way (2nd way) to do it using interceptors in angular
 
@@ -51,7 +60,7 @@ export class CategoryService {
     // );
   }
 
-  deleteCategory(id){
+  deleteCategory(id) {
     return this.http.delete<Category>(`${environment.apiBaseUrl}Categories/DeleteCategory/${id}?addAuth=true`);
   }
 }

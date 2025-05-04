@@ -12,16 +12,20 @@ import { Observable } from 'rxjs';
 export class CategoryListComponent implements OnInit {
 
   categories$?: Observable<Category[]>;
-  constructor(private categoryService: CategoryService){
+  sortOrder = '';
+  constructor(private categoryService: CategoryService) {
 
   }
-  
+
   ngOnInit() {
     this.categories$ = this.categoryService.getAllCategories();
   }
 
-  searchCategory(query: string){
+  searchCategory(query: string) {
     this.categories$ = this.categoryService.getAllCategories(query);
   }
 
+  sort(column: string, sortOrder: string) {
+    this.categories$ = this.categoryService.getAllCategories(undefined, column, sortOrder);
+  }
 }

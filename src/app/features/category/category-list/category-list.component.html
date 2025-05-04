@@ -21,7 +21,15 @@
             <thead>
                 <tr>
                     <th>Id</th>
-                    <th>Name</th>
+                    <th>
+                        <div class="d-flex justify-content-between">
+                            <span>Name</span>
+                            <span>
+                                <i class="bi bi-arrow-up" (click)="sortOrder = 'asc'; sort('name', sortOrder)"></i>
+                                <i class="bi bi-arrow-down" (click)="sortOrder = 'desc'; sort('name', sortOrder)"></i>
+                            </span>
+                        </div>
+                    </th>
                     <th>url Handle</th>
                     <th>Edit</th>
                 </tr>
