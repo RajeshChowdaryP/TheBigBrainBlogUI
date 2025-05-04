@@ -19,7 +19,7 @@ export class CategoryService {
 
   }
 
-  getAllCategories(queryParam?: string, sortBy?: string, sortDirection?: string): Observable<Category[]> {
+  getAllCategories(queryParam?: string, sortBy?: string, sortDirection?: string, pageNumber?: number, pageSize?: number): Observable<Category[]> {
     let params = new HttpParams();
     if (queryParam) {
       params = params.set('query', queryParam);
@@ -33,7 +33,24 @@ export class CategoryService {
       params = params.set('sortDirection', sortDirection);
     }
 
+    if (pageNumber) {
+      params = params.set('pageNumber', pageNumber);
+    }
+
+    if (pageSize) {
+      params = params.set('pageSize', pageSize);
+    }
+
     return this.http.get<Category[]>(`${environment.apiBaseUrl}Categories/GetAllCategories`, { params: params });
+  }
+
+  // getAllCategories(queryParam = '', sortBy = '', sortDirection = ''): Observable<Category[]> {
+  //   const params = new HttpParams({ fromObject: { query: queryParam, sortBy, sortDirection } });
+  //   return this.http.get<Category[]>(`${environment.apiBaseUrl}Categories/GetAllCategories`, { params });
+  // }
+
+  GetCategoryCount(): Observable<number> {
+    return this.http.get<number>(`${environment.apiBaseUrl}Categories/GetCategoryCount`);
   }
 
   getSelectedCategory(id: string): Observable<Category> {

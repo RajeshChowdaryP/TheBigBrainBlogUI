@@ -13,19 +13,50 @@ export class CategoryListComponent implements OnInit {
 
   categories$?: Observable<Category[]>;
   sortOrder = '';
+  categoryCount = 0;
+  pageNumber = 1;
+  pageSize = 6;
+  list: number[] = [];
+  queryText?: string | undefined = undefined;
+  columnName?: string | undefined = undefined;
   constructor(private categoryService: CategoryService) {
 
   }
 
   ngOnInit() {
-    this.categories$ = this.categoryService.getAllCategories();
+    this.categoryService.GetCategoryCount().subscribe({
+      next: (response) => {
+        this.categoryCount = response;
+        this.list = new Array(Math.ceil(response / this.pageSize));
+
+        this.categories$ = this.categoryService.getAllCategories(
+          undefined,
+          undefined,
+          undefined,
+          this.pageNumber,
+          this.pageSize
+        );
+
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    })
+
   }
 
   searchCategory(query: string) {
-    this.categories$ = this.categoryService.getAllCategories(query);
+    this.queryText = query;
+    this.categories$ = this.categoryService.getAllCategories(query,undefined, undefined, this.pageNumber, this.pageSize);
   }
 
   sort(column: string, sortOrder: string) {
-    this.categories$ = this.categoryService.getAllCategories(undefined, column, sortOrder);
+    this.columnName = column;
+    this.categories$ = this.categoryService.getAllCategories(undefined, column, sortOrder, this.pageNumber, this.pageSize);
+  }
+
+  goToPage(pageNumber: number) {
+    this.pageNumber = pageNumber;
+    this.categories$ = this.categoryService.getAllCategories(this.queryText, this.columnName, this.sortOrder, this.pageNumber, this.pageSize);
   }
 }
