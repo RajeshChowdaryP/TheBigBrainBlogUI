@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CategoryService } from '../../services/category.service';
 import { Category } from 'src/app/model/Category';
 import { Observable } from 'rxjs';
